@@ -53,3 +53,16 @@
 - Run 2: Failed
 - Run 3: Failed
 The test failed in all three runs. Without a session, cookies are not maintained between requests, so the load balancer may route requests to different servers.
+
+### Step 0.16, blocks of "how many of the three tools are excluded":
+  - B1: 0 tools excluded
+  - B2: 1 tool excluded
+  - B3: 2 tools excluded
+  - B4: 3 tools excluded
+  
+## Defect report
+- Title: QuickPizza returns 500 when all three tools are excluded
+- Request: POST /api/pizza with body {"excludedTools": ["Knife", "Pizza cutter", "Scissors"]}
+- Expected result: Status 400 Bad Request with a JSON error message.
+- Actual result: Status 500 Internal Server Error with an empty response body (Content-Length: 0).
+- Severity: High — The API returns an internal server error instead of a meaningful client error when no pizza can satisfy the request. This may prevent client applications from handling the situation correctly.
