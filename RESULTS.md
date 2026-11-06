@@ -47,3 +47,9 @@
 - Expected Status Code: 401
 - Expected Response: {"error": "authentication failed"}
 - Result: Both tests passed.
+
+### Step 0.12: A test without a session
+- Run 1: Failed
+- Run 2: Failed
+- Run 3: Failed
+The test failed in all three runs. Without a session, cookies are not maintained between requests, so the load balancer may route requests to different servers.
